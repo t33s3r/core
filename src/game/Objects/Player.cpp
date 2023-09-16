@@ -5028,7 +5028,7 @@ void Player::ResurrectPlayer(float restore_percent, bool applySickness, bool ign
 {
     if (sWorld.getConfig(CONFIG_BOOL_HARDCORE) && !InBattleGround() && !ignoreHardcore)
         return;
-{
+
     // Interrupt resurrect spells
     InterruptSpellsCastedOnMe(false, true);
 
