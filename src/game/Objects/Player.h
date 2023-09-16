@@ -2273,7 +2273,7 @@ class Player final: public Unit
         void SetResurrectionSpellId(uint32 resurrectionSpellId) { m_resurrectionSpellId = resurrectionSpellId; }
 #endif
         uint32 SelectResurrectionSpellId() const;
-        void ResurrectPlayer(float restore_percent, bool applySickness = false);
+        void ResurrectPlayer(float restore_percent, bool applySickness = false, bool ignoreHardcore = false);
         void BuildPlayerRepop();
         void RepopAtGraveyard();
         void ScheduleRepopAtGraveyard();

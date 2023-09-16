@@ -1709,6 +1709,9 @@ void Player::Update(uint32 update_diff, uint32 p_time)
             m_deathTimer -= p_time;
     }
 
+	if (sWorld.getConfig(CONFIG_BOOL_HARDCORE) && GetDeathState() == DEAD && !InBattleGround())
+        SpawnCorpseBones();
+
     UpdateEnchantTime(update_diff);
     UpdateHomebindTime(update_diff);
 
@@ -5021,7 +5024,10 @@ void Player::BuildPlayerRepop()
     SetDeathState(DEAD);
 }
 
-void Player::ResurrectPlayer(float restore_percent, bool applySickness)
+void Player::ResurrectPlayer(float restore_percent, bool applySickness, bool ignoreHardcore)
+{
+    if (sWorld.getConfig(CONFIG_BOOL_HARDCORE) && !InBattleGround() && !ignoreHardcore)
+        return;
 {
     // Interrupt resurrect spells
     InterruptSpellsCastedOnMe(false, true);
@@ -20227,7 +20233,7 @@ void Player::ResurectUsingRequestData()
         return;
     }
 
-    ResurrectPlayer(0.0f, false);
+    ResurrectPlayer(0.0f, false, true);
 
     if (GetMaxHealth() > m_resurrectHealth)
         SetHealth(m_resurrectHealth);

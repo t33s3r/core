@@ -6257,7 +6257,7 @@ void Spell::EffectSelfResurrect(SpellEffectIndex effIdx)
     }
 
     Player* plr = ((Player*)unitTarget);
-    plr->ResurrectPlayer(0.0f);
+    plr->ResurrectPlayer(0.0f, false, true);
 
     plr->SetHealth(ditheru(health));
     plr->SetPower(POWER_MANA, ditheru(mana));
@@ -6787,7 +6787,7 @@ void Spell::EffectSpiritHeal(SpellEffectIndex /*effIdx*/)
         player->RepopAtGraveyard();
 
     player->RemoveAurasDueToSpell(2584);
-    player->ResurrectPlayer(1.0f);
+    player->ResurrectPlayer(1.0f, false, true);
     player->SpawnCorpseBones();
     player->AutoReSummonPet();
 }
